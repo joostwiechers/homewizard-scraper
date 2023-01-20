@@ -1,2 +1,3 @@
-data/readings.json
+data/*
 node_modules/
+config.js

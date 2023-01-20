@@ -1,27 +1,13 @@
-const axios = require('axios')
-const DataFileAdapter = require('./src/DataFileAdapter')
+const HomeWizardScraper = require('./src/HomeWizardScraper')
 
-const url = 'http://192.168.178.59/api/v1/data'
+const config = require('./config')
 
-const dataFileAdapter = new DataFileAdapter()
+const homeWizardScraper = new HomeWizardScraper(config.url, config.dataFileLocation)
 
+// Initial scrape
+homeWizardScraper.scrape()
+
+// Set an interval that continuously scrapes the HomeWizard
 setInterval(() => {
-    axios.get(url)
-        .then(response => {
-            const currentData = JSON.parse(dataFileAdapter.read().toString())
-            let data = {
-                timestamp: Date.now(),
-                usage: response.data.active_power_w
-            }
-
-            if (Object.keys(currentData).length) {
-                dataFileAdapter.write(JSON.stringify([
-                    ...currentData,
-                    data
-                ]))
-                return
-            }
-
-            dataFileAdapter.write(JSON.stringify([data]))
-        })
-}, 10 * 1000)
+    homeWizardScraper.scrape()
+}, config.readInterval * 1000)
