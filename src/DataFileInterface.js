@@ -58,7 +58,10 @@ class DataFileInterface {
      * @returns {string} filePath
      */
     getFilePath() {
-        return `${this.dataFolder}${dayjs().week()}-${dayjs().year()}.json`
+        const weekOfYear = dayjs().week() < 10 
+            ? '0' + dayjs().week() 
+            : dayjs().week()
+        return `${this.dataFolder}${weekOfYear}-${dayjs().year()}.json`
     }
 }
 
