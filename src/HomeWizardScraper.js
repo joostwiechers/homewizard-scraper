@@ -39,6 +39,9 @@ class HomeWizardScraper {
 
                 this.dataFileInterface.write(JSON.stringify([data]))
             })
+            .catch(error => {
+                console.log(`${(new Date).toDateString()} - ${(new Date).toLocaleTimeString()} | ${error.message}`)
+            })
     }
 }
 

@@ -9,7 +9,8 @@ dayjs.extend(weekOfYear)
 class DataFileInterface {
 
     /**
-     * DatFileInterface constructor
+     * DataFileInterface constructor
+     * 
      * @param {string} dataFolder - The folder the files should be written to
      */
     constructor(dataFolder) {
@@ -18,6 +19,7 @@ class DataFileInterface {
 
     /**
      * Writes a file with given content
+     * 
      * @param {string} data - Data to be written to the data file
      */
     write(data) {
@@ -43,6 +45,7 @@ class DataFileInterface {
 
     /**
      * Reads and returns file contents of current week
+     * 
      * @returns {Buffer}
      */
     read() {
@@ -55,6 +58,7 @@ class DataFileInterface {
 
     /**
      * File path that will be used to read/write
+     * 
      * @returns {string} filePath
      */
     getFilePath() {
