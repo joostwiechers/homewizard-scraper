@@ -4,30 +4,30 @@ const weekOfYear = require('dayjs/plugin/weekOfYear')
 dayjs.extend(weekOfYear)
 
 /**
- * Interface that handles reading/writing the data files
+ * Interface that handles reading/writing the data files.
  */
 class DataFileInterface {
 
     /**
-     * DataFileInterface constructor
-     * 
-     * @param {string} dataFolder - The folder the files should be written to
+     * DataFileInterface constructor.
+     *
+     * @param {string} dataFolder - The folder the files should be written to.
      */
     constructor(dataFolder) {
         this.dataFolder = dataFolder
     }
 
     /**
-     * Writes a file with given content
-     * 
-     * @param {string} data - Data to be written to the data file
+     * Writes a file with given content.
+     *
+     * @param {string} data - Data to be written to the data file.
      */
     write(data) {
         fs.writeFileSync(this.getFilePath(), data)
     }
 
     /**
-     * Create folder/file when it does not exist
+     * Create folder/file when it does not exist.
      */
     create() {
         if (!fs.existsSync(this.dataFolder)) {
@@ -44,8 +44,8 @@ class DataFileInterface {
     }
 
     /**
-     * Reads and returns file contents of current week
-     * 
+     * Reads and returns file contents of current week.
+     *
      * @returns {Buffer}
      */
     read() {
@@ -57,13 +57,13 @@ class DataFileInterface {
     }
 
     /**
-     * File path that will be used to read/write
-     * 
+     * File path that will be used to read/write.
+     *
      * @returns {string} filePath
      */
     getFilePath() {
-        const weekOfYear = dayjs().week() < 10 
-            ? '0' + dayjs().week() 
+        const weekOfYear = dayjs().week() < 10
+            ? '0' + dayjs().week()
             : dayjs().week()
         return `${this.dataFolder}${weekOfYear}-${dayjs().year()}.json`
     }
